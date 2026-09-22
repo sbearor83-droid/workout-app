@@ -650,9 +650,12 @@ function renderToday(){
 
     <!-- Active Day Header -->
     <div class="dayhead">
-      <h2>Day ${d}</h2>
+      <div>
+        <h2>Day ${d}</h2>
+        <div style="font-size:13px;color:var(--muted);font-weight:700">${getActiveProfileName()}</div>
+      </div>
       <div class="meta">
-        ${getActiveProfileName()}<br>
+        <button class="btn-outline" style="padding:5px 10px;font-size:12px;margin-bottom:6px;border-color:var(--accent);color:var(--accent)" onclick="openAIImportModal()">📋 Import Gemini Plan</button><br>
         ${daysList.length > 1 ? `<button class="swap" onclick="switchWorkoutDay('${nextDay}')">Switch to Day ${nextDay}</button>` : ''}
       </div>
     </div>
@@ -1650,9 +1653,11 @@ function toggleSessionTimer(){
 window.addEventListener("pointerdown", unlockAudio, { once: true });
 window.addEventListener("keydown", unlockAudio, { once: true });
 
-// Register PWA Service Worker
+// Register PWA Service Worker with auto-update
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  navigator.serviceWorker.register('./sw.js').then((reg) => {
+    reg.update();
+  }).catch(()=>{});
 }
 
 // Boot
