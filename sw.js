@@ -1,4 +1,4 @@
-const CACHE_NAME = 'racklog-pro-v3';
+const CACHE_NAME = 'racklog-pro-v4';
 const ASSETS = [
   './',
   './index.html',

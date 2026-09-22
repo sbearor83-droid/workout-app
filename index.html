@@ -235,7 +235,7 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
   <nav>
     <button id="navToday" onclick="switchTab('today')" aria-pressed="true">Workout</button>
     <button id="navHistory" onclick="switchTab('history')" aria-pressed="false">History & PRs</button>
-    <button id="navPlan" onclick="switchTab('plan')" aria-pressed="false">Programs & Settings</button>
+    <button id="navPlan" onclick="switchTab('plan')" aria-pressed="false">Plan & Gear</button>
   </nav>
 
   <main id="view"></main>
@@ -655,7 +655,6 @@ function renderToday(){
         <div style="font-size:13px;color:var(--muted);font-weight:700">${getActiveProfileName()}</div>
       </div>
       <div class="meta">
-        <button class="btn-outline" style="padding:5px 10px;font-size:12px;margin-bottom:6px;border-color:var(--accent);color:var(--accent)" onclick="openAIImportModal()">📋 Import Gemini Plan</button><br>
         ${daysList.length > 1 ? `<button class="swap" onclick="switchWorkoutDay('${nextDay}')">Switch to Day ${nextDay}</button>` : ''}
       </div>
     </div>
@@ -934,9 +933,10 @@ function renderPlan(){
 
   return `
     <div class="plan-card">
-      <h3>Workout Programs & AI Importer</h3>
-      <p style="color:var(--muted);margin-bottom:12px">Switch between programs or paste any Gemini / AI routine on your phone without affecting other devices.</p>
+      <h3>Plan & Gear</h3>
+      <p style="color:var(--muted);margin-bottom:14px">Customize your gear, switch programs, or import any Gemini / AI workout plan on your device.</p>
 
+      <h4>Workout Plan & AI Importer</h4>
       <div class="setting-row">
         <label for="profileSelect">Active Program</label>
         <select id="profileSelect" onchange="switchProfile(this.value)">
