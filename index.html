@@ -41,9 +41,10 @@ h1,h2,h3,h4,.num{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif
 
 /* Header & Timers */
 header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:4px 0 14px}
-header h1{font-size:36px;line-height:.9;font-weight:800;margin:0;letter-spacing:.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+header h1{font-size:34px;line-height:.9;font-weight:800;margin:0;letter-spacing:.5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .badge-phase{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--panel-sub);color:var(--accent);letter-spacing:.5px;text-transform:uppercase}
 .badge-wake{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:rgba(56,189,248,0.15);color:var(--accent);display:none;align-items:center;gap:3px}
+.badge-plan{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(77,179,122,0.15);color:var(--done);letter-spacing:.3px}
 .header-right{text-align:right}
 .session-clock{font-size:26px;font-weight:800;color:var(--accent);cursor:pointer;font-family:"Barlow Condensed",sans-serif;line-height:1;user-select:none;touch-action:manipulation}
 .clock-state{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-top:2px}
@@ -179,8 +180,8 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
 .empty{color:var(--muted);padding:24px 0;text-align:center}
 
 /* Modals */
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:300;padding:16px}
-.modal{background:var(--panel);border:1px solid var(--line);border-radius:8px;max-width:440px;width:100%;padding:18px;max-height:85vh;overflow-y:auto}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:300;padding:16px}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:8px;max-width:480px;width:100%;padding:18px;max-height:88vh;overflow-y:auto}
 .modal h3{margin:0 0 10px;font-size:22px}
 .modal-sub-list{display:flex;flex-direction:column;gap:8px;margin:14px 0}
 .modal-sub-item{background:var(--panel-sub);border:1px solid var(--line);border-radius:6px;padding:10px 12px;cursor:pointer;touch-action:manipulation;transition:all .15s}
@@ -192,16 +193,24 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
 .modal-reps-btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn-close{background:none;border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:8px 14px;font:700 13px system-ui,sans-serif;cursor:pointer;width:100%;margin-top:8px}
 
+/* AI Plan Importer Styles */
+.ai-import-area{width:100%;height:150px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px;border-radius:6px;font-family:monospace;font-size:12px;resize:vertical;margin-top:8px}
+.ai-preview-box{background:var(--panel-sub);border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:12px 0;max-height:160px;overflow-y:auto;font-size:13px}
+.ai-preview-day{margin-bottom:8px}
+.ai-preview-day b{color:var(--accent);display:block;font-size:14px}
+.ai-preview-day ul{margin:2px 0;padding-left:18px;color:var(--ink)}
+
 /* Settings & Plan */
 .plan-card{background:var(--panel);padding:16px;border-radius:6px;border:1px solid var(--line);font-size:14px;line-height:1.5}
 .plan-card h3{font-size:24px;margin:0 0 6px}
-.plan-card h4{margin:14px 0 4px;color:var(--accent);font-size:16px;text-transform:uppercase}
+.plan-card h4{margin:16px 0 4px;color:var(--accent);font-size:16px;text-transform:uppercase}
 .plan-card ul{padding-left:18px;color:var(--muted);margin:4px 0 10px}
 .setting-row{margin-top:12px;display:flex;flex-direction:column;gap:4px}
 .setting-row label{font-weight:700;font-size:13px;color:var(--ink)}
-.setting-row input[type="date"],.setting-row select{height:38px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px;border-radius:4px;font:inherit}
+.setting-row input[type="date"],.setting-row input[type="text"],.setting-row select{height:38px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px;border-radius:4px;font:inherit}
 .checkbox-row{display:flex;align-items:center;gap:10px;margin-top:8px;cursor:pointer}
-.btn-outline{background:none;border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:8px 12px;font:700 13px system-ui,sans-serif;cursor:pointer;margin-top:8px}
+.btn-outline{background:none;border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:8px 12px;font:700 13px system-ui,sans-serif;cursor:pointer;margin-top:8px;touch-action:manipulation}
+.btn-action{background:var(--accent);border:none;color:#0E1312;border-radius:4px;padding:10px 14px;font:700 14px system-ui,sans-serif;cursor:pointer;margin-top:8px;touch-action:manipulation;width:100%}
 .btn-danger{background:none;border:none;color:var(--go);text-decoration:underline;cursor:pointer;font:inherit;padding:0;margin-top:14px}
 </style>
 </head>
@@ -212,6 +221,7 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
       <h1>
         Rack Log Pro 
         <span class="badge-phase" id="phaseBadge">Phase 1</span>
+        <span class="badge-plan" id="planBadge">Garage Rebuild</span>
         <span class="badge-wake" id="wakeBadge">⚡ Screen On</span>
       </h1>
       <div class="sub" id="weekline">Week 1 • Rebuild (3 RIR)</div>
@@ -225,7 +235,7 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
   <nav>
     <button id="navToday" onclick="switchTab('today')" aria-pressed="true">Workout</button>
     <button id="navHistory" onclick="switchTab('history')" aria-pressed="false">History & PRs</button>
-    <button id="navPlan" onclick="switchTab('plan')" aria-pressed="false">Plan & Gear</button>
+    <button id="navPlan" onclick="switchTab('plan')" aria-pressed="false">Programs & Settings</button>
   </nav>
 
   <main id="view"></main>
@@ -247,8 +257,8 @@ nav button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-col
 <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleFileImport(event)">
 
 <script>
-/* Exercise Definitions with Substitution Library */
-const EX_DEFS = {
+/* Default Exercise Definitions with Substitution Library */
+const DEFAULT_EX_DEFS = {
   squat: { 
     name: "Barbell Back Squat", kind: "bb", p1Reps: 8, p1Sets: 3, p2Reps: 5, p2Sets: 4, start: 105, inc: 5, rest: 90,
     subs: [
@@ -327,7 +337,7 @@ const EX_DEFS = {
   }
 };
 
-const PLAN_EXERCISES = {
+const DEFAULT_PLAN_EXERCISES = {
   A: ["squat", "bench", "row", "stepup", "swing_a"],
   B: ["deadlift", "ohp", "incline", "goblet", "carry"]
 };
@@ -347,11 +357,13 @@ const MOBILITY = {
   ]
 };
 
-/* State Definition */
+/* Application State */
 let S = {
   start: today(),
   day: "A",
   theme: "dark",
+  activeProfile: "default", // "default" or id of custom profile
+  customProfiles: {}, // { [id]: { name: "...", days: ["A","B"], routines: { A:[...], B:[...] } } }
   settings: {
     barWeight: 45,
     microPlates: true
@@ -389,7 +401,9 @@ function loadState(){
   } catch(e){}
   if(!S.settings) S.settings = { barWeight: 45, microPlates: true };
   if(!S.weights) S.weights = {};
-  if(!S.draft || !S.draft.lifts || !S.draft.lifts.squat || !Array.isArray(S.draft.lifts.squat.sets)){
+  if(!S.customProfiles) S.customProfiles = {};
+  if(!S.activeProfile) S.activeProfile = "default";
+  if(!S.draft || !S.draft.lifts){
     S.draft = initDraft(S.day);
   }
   document.documentElement.setAttribute("data-theme", S.theme || "dark");
@@ -405,9 +419,9 @@ function saveState(){
 function round5(n){ return Math.round(n / 5) * 5; }
 
 /* Warmup Ramp Calculator */
-function getWarmupRamp(key, workWeight){
-  const def = EX_DEFS[key];
-  if(def.kind !== 'bb') return null;
+function getWarmupRamp(key, workWeight, exDef){
+  const def = exDef || DEFAULT_EX_DEFS[key];
+  if(!def || def.kind !== 'bb') return null;
   const bar = S.settings.barWeight || 45;
   const w = parseFloat(workWeight) || 0;
   if(w <= bar) return [{ label: "Empty Bar", w: bar, r: 8 }];
@@ -427,7 +441,7 @@ function getWarmupRamp(key, workWeight){
   ];
 }
 
-/* Coach Progression Note & 2-Session Fail Detector */
+/* Coach Progression Note */
 function getLastTwoSessionsFor(key){
   let results = [];
   for(let i = S.sessions.length - 1; i >= 0; i--){
@@ -440,23 +454,23 @@ function getLastTwoSessionsFor(key){
   return results;
 }
 
-function getCoachNote(key, currentWeight){
+function getCoachNote(key, currentWeight, exDef){
   const lastTwo = getLastTwoSessionsFor(key);
-  const def = EX_DEFS[key];
+  const def = exDef || DEFAULT_EX_DEFS[key];
   if(!lastTwo.length){
-    return def.kind === 'bb' 
+    return (def && def.kind === 'bb') 
       ? `<b>First session:</b> Start conservative. Stop each set with 2–3 reps left in reserve (no failure).` 
       : `Select a solid weight allowing crisp form for all prescribed reps.`;
   }
   
   const last = lastTwo[0];
-  if(lastTwo.length >= 2 && !lastTwo[0].allDone && !lastTwo[1].allDone && def.kind === 'bb'){
+  if(lastTwo.length >= 2 && !lastTwo[0].allDone && !lastTwo[1].allDone && def && def.kind === 'bb'){
     return `<span class="coach-note deload-alert">⚠️ Stalled 2 sessions in a row. Auto-deloaded 10% to rebuild tendon resilience and form.</span>`;
   }
 
   if(last.allDone){
-    const step = (S.settings.microPlates && def.kind === 'bb' && (key === 'ohp' || key === 'bench')) ? 2.5 : def.inc;
-    return def.kind === 'bb'
+    const step = (S.settings.microPlates && def && def.kind === 'bb' && (key === 'ohp' || key === 'bench')) ? 2.5 : (def ? def.inc : 5);
+    return (def && def.kind === 'bb')
       ? `<b>Last session:</b> ${last.w} lbs (all sets done). Weight bumped <b>+${step} lbs</b>.`
       : `<b>Last session:</b> ${last.w} lbs completed cleanly.`;
   } else {
@@ -464,43 +478,90 @@ function getCoachNote(key, currentWeight){
   }
 }
 
+/* Active Profile Helpers */
+function getActiveProfileName(){
+  if(S.activeProfile === 'default') return "Garage Rebuild";
+  const p = S.customProfiles[S.activeProfile];
+  return p ? p.name : "Custom Plan";
+}
+
+function getActivePlanDays(){
+  if(S.activeProfile === 'default') return ["A", "B"];
+  const p = S.customProfiles[S.activeProfile];
+  return (p && p.days && p.days.length) ? p.days : ["A", "B"];
+}
+
 /* New Draft Generator */
 function initDraft(dayKey){
   const phase = getPhase();
-  const day = dayKey || S.day || "A";
+  const availableDays = getActivePlanDays();
+  const day = availableDays.includes(dayKey) ? dayKey : availableDays[0];
   const lifts = {};
 
-  PLAN_EXERCISES[day].forEach(key => {
-    const def = EX_DEFS[key];
-    const targetSets = phase === 1 ? def.p1Sets : def.p2Sets;
-    const targetReps = phase === 1 ? def.p1Reps : def.p2Reps;
+  if(S.activeProfile === 'default'){
+    DEFAULT_PLAN_EXERCISES[day].forEach(key => {
+      const def = DEFAULT_EX_DEFS[key];
+      const targetSets = phase === 1 ? def.p1Sets : def.p2Sets;
+      const targetReps = phase === 1 ? def.p1Reps : def.p2Reps;
 
-    let initialWeight = def.start;
-    if(S.weights && S.weights[key] != null){
-      initialWeight = S.weights[key];
-    } else {
-      const lastTwo = getLastTwoSessionsFor(key);
-      if(lastTwo.length){
-        const last = lastTwo[0];
-        if(lastTwo.length >= 2 && !lastTwo[0].allDone && !lastTwo[1].allDone && def.kind === 'bb'){
-          initialWeight = round5(last.w * 0.90);
-        } else if(last.allDone && def.kind === 'bb'){
-          const step = (S.settings.microPlates && (key === 'ohp' || key === 'bench')) ? 2.5 : def.inc;
-          initialWeight = Math.min(215, last.w + step);
-        } else {
-          initialWeight = last.w;
+      let initialWeight = def.start;
+      if(S.weights && S.weights[key] != null){
+        initialWeight = S.weights[key];
+      } else {
+        const lastTwo = getLastTwoSessionsFor(key);
+        if(lastTwo.length){
+          const last = lastTwo[0];
+          if(lastTwo.length >= 2 && !lastTwo[0].allDone && !lastTwo[1].allDone && def.kind === 'bb'){
+            initialWeight = round5(last.w * 0.90);
+          } else if(last.allDone && def.kind === 'bb'){
+            const step = (S.settings.microPlates && (key === 'ohp' || key === 'bench')) ? 2.5 : def.inc;
+            initialWeight = Math.min(215, last.w + step);
+          } else {
+            initialWeight = last.w;
+          }
         }
       }
-    }
 
-    lifts[key] = {
-      name: def.name,
-      kind: def.kind,
-      w: initialWeight,
-      reps: targetReps,
-      sets: Array(targetSets).fill(0)
-    };
-  });
+      lifts[key] = {
+        name: def.name,
+        kind: def.kind,
+        w: initialWeight,
+        reps: targetReps,
+        rest: def.rest,
+        sets: Array(targetSets).fill(0)
+      };
+    });
+  } else {
+    // Custom Profile
+    const profile = S.customProfiles[S.activeProfile];
+    const customList = (profile && profile.routines && profile.routines[day]) ? profile.routines[day] : [];
+    
+    customList.forEach(ex => {
+      let initialWeight = ex.w || 0;
+      if(S.weights && S.weights[ex.id] != null){
+        initialWeight = S.weights[ex.id];
+      } else {
+        const lastTwo = getLastTwoSessionsFor(ex.id);
+        if(lastTwo.length){
+          const last = lastTwo[0];
+          if(last.allDone && ex.kind === 'bb'){
+            initialWeight = Math.min(215, last.w + 5);
+          } else {
+            initialWeight = last.w;
+          }
+        }
+      }
+
+      lifts[ex.id] = {
+        name: ex.name,
+        kind: ex.kind || 'wt',
+        w: initialWeight,
+        reps: ex.reps || 10,
+        rest: ex.rest || 60,
+        sets: Array(ex.setsCount || 3).fill(0)
+      };
+    });
+  }
 
   return {
     date: today(),
@@ -545,7 +606,8 @@ function plateHTML(w){
 function render(){
   const curPhase = getPhase();
   document.getElementById("phaseBadge").textContent = `Phase ${curPhase}`;
-  document.getElementById("weekline").textContent = `Week ${weekNum()} • ${curPhase === 1 ? 'Rebuild (3 RIR)' : 'Strength Progression'}`;
+  document.getElementById("planBadge").textContent = getActiveProfileName();
+  document.getElementById("weekline").textContent = `Week ${weekNum()} • ${S.activeProfile === 'default' ? (curPhase === 1 ? 'Rebuild (3 RIR)' : 'Strength Progression') : getActiveProfileName()}`;
   document.getElementById("navToday").setAttribute("aria-pressed", curTab === "today");
   document.getElementById("navHistory").setAttribute("aria-pressed", curTab === "history");
   document.getElementById("navPlan").setAttribute("aria-pressed", curTab === "plan");
@@ -557,53 +619,56 @@ function render(){
 }
 
 function renderToday(){
-  if(!S.draft || S.draft.day !== S.day || S.draft.phase !== getPhase() || !S.draft.lifts || !S.draft.lifts.squat){
+  if(!S.draft || !S.draft.lifts || Object.keys(S.draft.lifts).length === 0){
     S.draft = initDraft(S.day);
     saveState();
   }
 
   const D = S.draft;
   const d = D.day;
+  const daysList = getActivePlanDays();
+  const nextDay = daysList[(daysList.indexOf(d) + 1) % daysList.length];
 
   let h = `
-    <!-- 3-Min Mobility Prime Drawer -->
-    <div class="prep-card">
-      <div class="prep-head" onclick="togglePrep()">
-        <h3>3-Minute Mobility Prime (Day ${d})</h3>
-        <span class="badge">${prepOpen ? 'Hide' : 'Show Guide'}</span>
+    <!-- 3-Min Mobility Prime Drawer (Only on Default Garage Rack Plan) -->
+    ${S.activeProfile === 'default' && MOBILITY[d] ? `
+      <div class="prep-card">
+        <div class="prep-head" onclick="togglePrep()">
+          <h3>3-Minute Mobility Prime (Day ${d})</h3>
+          <span class="badge">${prepOpen ? 'Hide' : 'Show Guide'}</span>
+        </div>
+        <div class="prep-body" style="display:${prepOpen ? 'flex' : 'none'}">
+          ${MOBILITY[d].map(m => `
+            <div class="prep-item">
+              <b>${m.name} (${m.t})</b>
+              <span>${m.cue}</span>
+            </div>
+          `).join("")}
+        </div>
       </div>
-      <div class="prep-body" style="display:${prepOpen ? 'flex' : 'none'}">
-        ${MOBILITY[d].map(m => `
-          <div class="prep-item">
-            <b>${m.name} (${m.t})</b>
-            <span>${m.cue}</span>
-          </div>
-        `).join("")}
-      </div>
-    </div>
+    ` : ''}
 
     <!-- Active Day Header -->
     <div class="dayhead">
       <h2>Day ${d}</h2>
       <div class="meta">
-        ${d === 'A' ? 'Squat & DB Push' : 'Deadlift & Overhead Press'}<br>
-        <button class="swap" onclick="switchWorkoutDay()">Switch to Day ${d==='A'?'B':'A'}</button>
+        ${getActiveProfileName()}<br>
+        ${daysList.length > 1 ? `<button class="swap" onclick="switchWorkoutDay('${nextDay}')">Switch to Day ${nextDay}</button>` : ''}
       </div>
     </div>
   `;
 
-  PLAN_EXERCISES[d].forEach(key => {
-    const def = EX_DEFS[key];
-    const lift = D.lifts[key];
+  Object.entries(D.lifts).forEach(([key, lift]) => {
+    const def = S.activeProfile === 'default' ? DEFAULT_EX_DEFS[key] : null;
     const completedSets = lift.sets.filter(r => r > 0).length;
     const allDone = completedSets === lift.sets.length && lift.sets.every(r => r >= lift.reps);
     const hasPartial = completedSets > 0 && !allDone;
 
     const currentPlateWeight = platePreviews[key] != null ? platePreviews[key].w : lift.w;
     const previewLabel = platePreviews[key] != null ? platePreviews[key].label : null;
-    const warmupRamp = getWarmupRamp(key, lift.w);
+    const warmupRamp = getWarmupRamp(key, lift.w, def || lift);
 
-    const stepAmount = (S.settings.microPlates && def.kind === 'bb' && (key === 'ohp' || key === 'bench')) ? 2.5 : 5;
+    const stepAmount = (S.settings.microPlates && lift.kind === 'bb' && (key === 'ohp' || key === 'bench')) ? 2.5 : 5;
 
     h += `
       <section class="ex ${allDone ? 'complete' : hasPartial ? 'partial' : ''}" id="ex-sec-${key}">
@@ -611,9 +676,9 @@ function renderToday(){
           <div>
             <div class="ex-title-wrap">
               <h3>${lift.name}</h3>
-              ${def.subs ? `<button class="btn-sub" onclick="openSwapModal('${key}')" title="Swap Exercise">⇄</button>` : ''}
+              ${def && def.subs ? `<button class="btn-sub" onclick="openSwapModal('${key}')" title="Swap Exercise">⇄</button>` : ''}
             </div>
-            <div class="rx">${lift.sets.length} working sets × ${lift.reps} reps • Rest ${def.rest}s</div>
+            <div class="rx">${lift.sets.length} working sets × ${lift.reps} reps • Rest ${lift.rest || 60}s</div>
           </div>
           <span class="status-badge" id="badge-${key}">
             ${completedSets} / ${lift.sets.length} ${allDone ? '✓ Complete' : hasPartial ? 'Partial' : 'Done'}
@@ -677,7 +742,7 @@ function renderToday(){
                 <button type="button" 
                   class="set-bubble ${isDone ? 'on' : isPartial ? 'partial' : ''}"
                   id="bubble-${key}-${i}"
-                  onclick="toggleSetBubble('${key}', ${i}, ${def.rest})">
+                  onclick="toggleSetBubble('${key}', ${i}, ${lift.rest || 60})">
                   ${isDone ? '✓' : isPartial ? repsDone : (i + 1)}
                 </button>
                 <button type="button" class="btn-reps-adj" onclick="openRepsModal('${key}', ${i})">
@@ -691,7 +756,7 @@ function renderToday(){
 
         <!-- Coach Note / Progression History -->
         <div class="coach-note" id="coach-${key}">
-          ${getCoachNote(key, lift.w)}
+          ${getCoachNote(key, lift.w, def || lift)}
         </div>
       </section>
     `;
@@ -789,7 +854,7 @@ function renderHistory(){
     h += `
       <div class="hist">
         <div class="top">
-          <span>Day ${s.day} (Phase ${s.phase || 1})</span>
+          <span>Day ${s.day} (${s.programName || 'Garage Rebuild'})</span>
           <span style="color:var(--muted);font-weight:400">${s.date}</span>
         </div>
         <div class="lifts">${s.summary}</div>
@@ -862,18 +927,36 @@ function renderProgressChart(){
 }
 
 function renderPlan(){
+  const customKeys = Object.keys(S.customProfiles);
+
   return `
     <div class="plan-card">
-      <h3>30-Minute Garage Blueprint</h3>
-      <p style="color:var(--muted);margin-bottom:12px">Run 3 non-consecutive days per week. Streamlined for maximum garage rack efficiency.</p>
-      
-      <h4>The 2-Phase Periodization</h4>
+      <h3>Workout Programs & AI Importer</h3>
+      <p style="color:var(--muted);margin-bottom:12px">Switch between programs or paste any Gemini / AI routine on your phone without affecting other devices.</p>
+
+      <div class="setting-row">
+        <label for="profileSelect">Active Program</label>
+        <select id="profileSelect" onchange="switchProfile(this.value)">
+          <option value="default" ${S.activeProfile==='default'?'selected':''}>Garage Rebuild (Default 2-Phase)</option>
+          ${customKeys.map(k => `
+            <option value="${k}" ${S.activeProfile===k?'selected':''}>${S.customProfiles[k].name}</option>
+          `).join("")}
+        </select>
+      </div>
+
+      <button class="btn-action" onclick="openAIImportModal()">📋 Paste & Import Plan from Gemini / AI</button>
+
+      ${S.activeProfile !== 'default' ? `
+        <button class="btn-danger" style="margin-top:8px" onclick="deleteCurrentProfile()">Delete This Custom Plan</button>
+      ` : ''}
+
+      <h4>Program Blueprint (Garage Rebuild)</h4>
       <ul>
         <li><b>Phase 1 (Weeks 1 to 4): Rebuild & Connective Tissue</b><br>
         3 working sets of 8 reps. Stop every working set with 2–3 reps in reserve (RIR 2-3). Do not train to failure.</li>
         <li><b>Phase 2 (Weeks 5+): Build Strength</b><br>
         Main compound lifts shift to 4 working sets of 5 reps. Auto-add +5 lbs every session where all working sets are completed cleanly.</li>
-        <li><b>Automated 10% Deload Rule:</b> If you miss prescribed reps 2 sessions in a row on a barbell lift, the app automatically drops weight by 10% to let joints recover and rebuild momentum.</li>
+        <li><b>Automated 10% Deload Rule:</b> If you miss prescribed reps 2 sessions in a row on a barbell lift, the app automatically drops weight by 10% to rebuild momentum.</li>
       </ul>
 
       <h4>Hardware & Plate Stack Calibration</h4>
@@ -908,6 +991,193 @@ function renderPlan(){
   `;
 }
 
+/* AI Plan Parser & Modal */
+function parsePastedPlan(text){
+  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  let currentDay = 'A';
+  let routines = {};
+
+  lines.forEach(line => {
+    const dayMatch = line.match(/^(?:Day\s*([A-Za-z0-9]+)|Workout\s*([A-Za-z0-9]+)|([A-Za-z0-9]+)\s*Day)/i);
+    if(dayMatch){
+      currentDay = (dayMatch[1] || dayMatch[2] || dayMatch[3]).toUpperCase();
+      if(!routines[currentDay]) routines[currentDay] = [];
+      return;
+    }
+
+    if(!routines[currentDay]) routines[currentDay] = [];
+    let clean = line.replace(/^[-*•\d.)\]\s]+/, '').trim();
+    if(!clean) return;
+
+    let sets = 3, reps = 10;
+    const srMatch = clean.match(/(\d+)\s*(?:x|sets?\s*of|sets?\s*x)\s*(\d+)/i);
+    if(srMatch){
+      sets = parseInt(srMatch[1], 10);
+      reps = parseInt(srMatch[2], 10);
+    }
+
+    let rest = 60;
+    const restMatch = clean.match(/rest\s*:?\s*(\d+)\s*s?/i) || clean.match(/(\d+)\s*s?\s*rest/i);
+    if(restMatch) rest = parseInt(restMatch[1], 10);
+
+    let weight = 0;
+    const wtMatch = clean.match(/(?:@|\bat\b)?\s*(\d+(?:\.\d+)?)\s*(?:lbs?|#)/i);
+    if(wtMatch) weight = parseFloat(wtMatch[1]);
+
+    let name = clean
+      .replace(/(\d+)\s*(?:x|sets?\s*of|sets?\s*x)\s*(\d+)[^,;)]*/ig, '')
+      .replace(/\(?\b\d+\s*s?\s*rest\b\)?/ig, '')
+      .replace(/\(?\brest\s*:?\s*\d+\s*s?\b\)?/ig, '')
+      .replace(/(?:@|\bat\b)?\s*\d+(?:\.\d+)?\s*(?:lbs?|#)/ig, '')
+      .replace(/[:\-–—\s()]+$/, '')
+      .replace(/^[:\-–—\s()]+/, '')
+      .trim();
+
+    if(!name) name = clean;
+
+    let kind = 'wt';
+    const lower = name.toLowerCase();
+    if(lower.includes('barbell') || (lower.includes('bench press') && !lower.includes('db')) || (lower.includes('back squat') || lower.includes('front squat')) || (lower.includes('deadlift') && !lower.includes('dumbbell') && !lower.includes('kb') && !lower.includes('rdl'))) {
+      kind = 'bb';
+      if(!weight) weight = 45;
+    } else if(lower.includes('dumbbell') || lower.includes('db') || lower.includes('curl') || lower.includes('press') || lower.includes('rdl')) {
+      kind = 'db';
+      if(!weight) weight = 15;
+    } else if(lower.includes('kettlebell') || lower.includes('kb') || lower.includes('swing') || lower.includes('goblet') || lower.includes('carry')) {
+      kind = 'kb';
+      if(!weight) weight = 20;
+    } else if(lower.includes('plank') || lower.includes('push-up') || lower.includes('pushup') || lower.includes('bodyweight') || lower.includes('jump') || lower.includes('dead bug') || lower.includes('deadbug') || lower.includes('bridge')) {
+      kind = 'bw';
+      weight = 0;
+    }
+
+    routines[currentDay].push({
+      id: 'ex_' + Math.random().toString(36).substr(2, 7),
+      name: name,
+      kind: kind,
+      setsCount: sets,
+      reps: reps,
+      w: weight,
+      rest: rest
+    });
+  });
+
+  return routines;
+}
+
+let parsedPreviewPlan = null;
+
+function openAIImportModal(){
+  unlockAudio();
+  parsedPreviewPlan = null;
+  const html = `
+    <div class="modal-backdrop" onclick="closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <h3>Import Plan from Gemini / AI</h3>
+        <p style="color:var(--muted);font-size:13px;margin:0">Paste the workout text generated by Gemini, ChatGPT, or your notes. The app will auto-format your exercises, sets, reps, and timers.</p>
+        
+        <div class="setting-row" style="margin-top:10px">
+          <label for="planNameInput">Program Name</label>
+          <input type="text" id="planNameInput" placeholder="e.g. Sarah's Gemini Plan, DB Split..." value="My Custom Routine">
+        </div>
+
+        <textarea class="ai-import-area" id="planTextInput" placeholder="Day A:\n- Goblet Squat 3x10 (Rest 60s)\n- Dumbbell RDL 3x10\n- DB Bench Press 3x8\n- Plank 3x45s\n\nDay B:\n- DB Shoulder Press 3x8\n- One-Arm DB Row 3x10\n- KB Swings 4x12\n- Suitcase Carry 3x40yd" oninput="handlePlanTextInput(this.value)"></textarea>
+
+        <div id="aiPreviewBox" style="display:none" class="ai-preview-box"></div>
+
+        <button class="btn-action" id="btnActivatePlan" style="display:none" onclick="activateImportedPlan()">Activate This Plan</button>
+        <button class="btn-close" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  `;
+  const cont = document.getElementById("modalContainer");
+  cont.innerHTML = html;
+  cont.style.display = "block";
+}
+
+function handlePlanTextInput(text){
+  const previewBox = document.getElementById("aiPreviewBox");
+  const activateBtn = document.getElementById("btnActivatePlan");
+  if(!text.trim()){
+    previewBox.style.display = "none";
+    activateBtn.style.display = "none";
+    return;
+  }
+
+  const routines = parsePastedPlan(text);
+  const days = Object.keys(routines);
+  if(!days.length || days.every(d => routines[d].length === 0)){
+    previewBox.style.display = "block";
+    previewBox.innerHTML = `<span style="color:var(--go)">No exercises detected yet. Format as "Day A:" followed by exercises.</span>`;
+    activateBtn.style.display = "none";
+    return;
+  }
+
+  parsedPreviewPlan = routines;
+  let previewHTML = `<b>Detected ${days.length} Days (${days.join(', ')}):</b>`;
+  days.forEach(d => {
+    previewHTML += `
+      <div class="ai-preview-day">
+        <b>Day ${d} (${routines[d].length} exercises):</b>
+        <ul>
+          ${routines[d].map(e => `<li>${e.name} • ${e.setsCount}×${e.reps} (${e.kind.toUpperCase()})</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  });
+
+  previewBox.innerHTML = previewHTML;
+  previewBox.style.display = "block";
+  activateBtn.style.display = "block";
+}
+
+function activateImportedPlan(){
+  if(!parsedPreviewPlan) return;
+  const nameInput = document.getElementById("planNameInput");
+  const planName = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : "Custom AI Plan";
+  const planId = "plan_" + Date.now();
+  const days = Object.keys(parsedPreviewPlan);
+
+  S.customProfiles[planId] = {
+    name: planName,
+    days: days,
+    routines: parsedPreviewPlan
+  };
+
+  S.activeProfile = planId;
+  S.day = days[0] || "A";
+  S.draft = initDraft(S.day);
+  platePreviews = {};
+  saveState();
+  closeModal();
+  curTab = "today";
+  render();
+  alert(`"${planName}" activated! Your new workout is ready on the Workout tab.`);
+}
+
+function switchProfile(profileId){
+  S.activeProfile = profileId;
+  const availableDays = getActivePlanDays();
+  S.day = availableDays[0] || "A";
+  S.draft = initDraft(S.day);
+  platePreviews = {};
+  saveState();
+  render();
+}
+
+function deleteCurrentProfile(){
+  if(S.activeProfile === 'default') return;
+  const name = getActiveProfileName();
+  if(confirm(`Delete "${name}"? You can always recreate or re-paste it anytime.`)){
+    delete S.customProfiles[S.activeProfile];
+    S.activeProfile = "default";
+    S.day = "A";
+    S.draft = initDraft(S.day);
+    saveState();
+    render();
+  }
+}
+
 /* Interactive Plate Previews */
 function previewWarmupPlates(key, weight, label){
   unlockAudio();
@@ -926,8 +1196,8 @@ function previewWarmupPlates(key, weight, label){
 /* Modals: Substitutions & Reps Logging */
 function openSwapModal(key){
   unlockAudio();
-  const def = EX_DEFS[key];
-  if(!def.subs) return;
+  const def = DEFAULT_EX_DEFS[key];
+  if(!def || !def.subs) return;
   const currentName = S.draft.lifts[key].name;
 
   const html = `
@@ -987,13 +1257,13 @@ function openRepsModal(key, setIdx){
 }
 
 function setExactReps(key, setIdx, reps){
-  const def = EX_DEFS[key];
-  S.draft.lifts[key].sets[setIdx] = reps;
+  const lift = S.draft.lifts[key];
+  lift.sets[setIdx] = reps;
   saveState();
   closeModal();
   render();
   if(reps > 0){
-    startRest(def.rest || 60);
+    startRest(lift.rest || 60);
   }
 }
 
@@ -1045,15 +1315,17 @@ function toggleSetBubble(key, idx, restSec){
     lift.sets[idx] = 0;
   } else {
     lift.sets[idx] = lift.reps;
-    startRest(restSec || 60);
+    startRest(restSec || lift.rest || 60);
   }
   saveState();
   render();
 }
 
-function switchWorkoutDay(){
+function switchWorkoutDay(targetDay){
   unlockAudio();
-  S.day = S.day === 'A' ? 'B' : 'A';
+  const daysList = getActivePlanDays();
+  const next = targetDay || daysList[(daysList.indexOf(S.day) + 1) % daysList.length];
+  S.day = next;
   S.draft = initDraft(S.day);
   platePreviews = {};
   saveState();
@@ -1098,7 +1370,7 @@ function setTheme(t){
   saveState();
 }
 
-/* Session Completion with Auto 10% Deload Rule & Notes */
+/* Session Completion with Auto Progression & Notes */
 function finishSession(){
   unlockAudio();
   const D = S.draft;
@@ -1112,7 +1384,7 @@ function finishSession(){
   let sessionLifts = {};
 
   Object.entries(D.lifts).forEach(([key, lift]) => {
-    const def = EX_DEFS[key];
+    const def = S.activeProfile === 'default' ? DEFAULT_EX_DEFS[key] : null;
     const completedSets = lift.sets.filter(r => r > 0).length;
     const allDone = completedSets === lift.sets.length && lift.sets.every(r => r >= lift.reps);
     const repDetails = lift.sets.filter(r => r > 0).join(",");
@@ -1131,13 +1403,13 @@ function finishSession(){
       summaryParts.push(`${lift.name.split(" (")[0]}: ${lift.w ? lift.w + '# ' : ''}(${repDetails})`);
     }
 
-    if(def.kind === 'bb'){
+    if(lift.kind === 'bb'){
       const lastTwo = getLastTwoSessionsFor(key);
       if(!allDone && lastTwo.length > 0 && !lastTwo[0].allDone){
         const deloadWeight = round5(lift.w * 0.90);
         S.weights[key] = deloadWeight;
       } else if(allDone){
-        const step = (S.settings.microPlates && (key === 'ohp' || key === 'bench')) ? 2.5 : def.inc;
+        const step = (S.settings.microPlates && def && (key === 'ohp' || key === 'bench')) ? 2.5 : 5;
         S.weights[key] = Math.min(215, lift.w + step);
       } else {
         S.weights[key] = lift.w;
@@ -1147,17 +1419,21 @@ function finishSession(){
     }
   });
 
+  const daysList = getActivePlanDays();
+  const nextDay = daysList[(daysList.indexOf(D.day) + 1) % daysList.length];
+
   const sessionEntry = {
     date: today(),
     day: D.day,
     phase: D.phase,
+    programName: getActiveProfileName(),
     summary: summaryParts.join(" | "),
     note: D.note ? D.note.trim() : "",
     lifts: sessionLifts
   };
 
   S.sessions.push(sessionEntry);
-  S.day = D.day === 'A' ? 'B' : 'A';
+  S.day = nextDay;
   S.draft = initDraft(S.day);
   platePreviews = {};
   saveState();
