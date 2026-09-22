@@ -1,0 +1,879 @@
+!DOCTYPE html
+html lang=en
+head
+  meta charset=UTF-8
+  meta name=viewport content=width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no
+  titleIronHabit 30 - Home Gym Trackertitle
+  style
+    root {
+      --bg #0f172a;
+      --card-bg #1e293b;
+      --card-border #334155;
+      --accent #38bdf8;
+      --accent-hover #0284c7;
+      --text-main #f8fafc;
+      --text-muted #94a3b8;
+      --success #10b981;
+      --success-dark #064e3b;
+      --danger #ef4444;
+      --input-bg #ffffff;
+      --input-text #0f172a;
+    }
+
+     {
+      box-sizing border-box;
+      margin 0;
+      padding 0;
+      font-family -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color transparent;
+    }
+
+    body {
+      background-color var(--bg);
+      color var(--text-main);
+      padding 12px;
+      max-width 580px;
+      margin 0 auto;
+      padding-bottom 90px;
+    }
+
+     Header & Clocks 
+    .header-panel {
+      background var(--card-bg);
+      border 1px solid var(--card-border);
+      border-radius 12px;
+      padding 14px;
+      margin-bottom 12px;
+      position sticky;
+      top 8px;
+      z-index 100;
+      box-shadow 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    .timer-row {
+      display flex;
+      justify-content space-between;
+      align-items center;
+      margin-bottom 10px;
+    }
+
+    .clock-display {
+      font-size 28px;
+      font-weight 800;
+      letter-spacing 1px;
+      font-variant-numeric tabular-nums;
+      color var(--accent);
+    }
+
+    .clock-controls {
+      display flex;
+      gap 6px;
+    }
+
+    .btn-timer {
+      background #334155;
+      color #fff;
+      border none;
+      padding 6px 12px;
+      border-radius 6px;
+      font-size 13px;
+      font-weight 600;
+      cursor pointer;
+    }
+
+    .rest-chip-row {
+      display flex;
+      align-items center;
+      gap 8px;
+      border-top 1px solid var(--card-border);
+      padding-top 8px;
+    }
+
+    .rest-label {
+      font-size 12px;
+      color var(--text-muted);
+      text-transform uppercase;
+      font-weight 700;
+    }
+
+    .btn-chip {
+      background #0f172a;
+      border 1px solid var(--card-border);
+      color var(--text-main);
+      padding 4px 10px;
+      border-radius 16px;
+      font-size 12px;
+      font-weight 600;
+      cursor pointer;
+    }
+
+    .btn-chip.active {
+      background var(--accent);
+      color #0f172a;
+      border-color var(--accent);
+    }
+
+     Tab Switcher 
+    .tab-bar {
+      display grid;
+      grid-template-columns 1fr 1fr 1fr;
+      gap 6px;
+      margin-bottom 12px;
+    }
+
+    .tab-btn {
+      background var(--card-bg);
+      border 1px solid var(--card-border);
+      color var(--text-muted);
+      padding 10px;
+      border-radius 8px;
+      font-weight 700;
+      font-size 13px;
+      cursor pointer;
+      text-align center;
+    }
+
+    .tab-btn.active {
+      background var(--accent);
+      color #0f172a;
+      border-color var(--accent);
+    }
+
+     Section Cards 
+    .card {
+      background var(--card-bg);
+      border 1px solid var(--card-border);
+      border-radius 12px;
+      padding 14px;
+      margin-bottom 12px;
+    }
+
+    .card-title {
+      font-size 15px;
+      font-weight 700;
+      display flex;
+      justify-content space-between;
+      align-items center;
+      cursor pointer;
+      user-select none;
+    }
+
+    .tag {
+      font-size 10px;
+      background #334155;
+      padding 2px 6px;
+      border-radius 4px;
+      color var(--accent);
+      font-weight 600;
+      text-transform uppercase;
+    }
+
+     Warm-up Accordion 
+    .warmup-item {
+      border 1px solid var(--card-border);
+      border-radius 8px;
+      margin-top 8px;
+      overflow hidden;
+      background #151f30;
+    }
+
+    .warmup-header {
+      padding 10px;
+      display flex;
+      justify-content space-between;
+      align-items center;
+      cursor pointer;
+    }
+
+    .warmup-name {
+      font-size 13px;
+      font-weight 600;
+    }
+
+    .warmup-time {
+      font-size 12px;
+      color var(--accent);
+      font-weight 700;
+    }
+
+    .warmup-details {
+      display none;
+      padding 10px;
+      border-top 1px solid var(--card-border);
+      background #0f172a;
+      font-size 12px;
+      line-height 1.4;
+      color var(--text-muted);
+    }
+
+    .warmup-details.open {
+      display block;
+    }
+
+     Exercise Sets & Interactive Controls 
+    .exercise-block {
+      margin-top 10px;
+      padding-top 10px;
+      border-top 1px solid #283548;
+    }
+
+    .exercise-blockfirst-of-type {
+      border-top none;
+      padding-top 0;
+    }
+
+    .exercise-header {
+      display flex;
+      justify-content space-between;
+      align-items baseline;
+      margin-bottom 6px;
+    }
+
+    .exercise-name {
+      font-size 14px;
+      font-weight 700;
+      color #fff;
+    }
+
+    .exercise-sub {
+      font-size 11px;
+      color var(--text-muted);
+    }
+
+    .set-row {
+      display grid;
+      grid-template-columns 55px 1fr 1fr 38px;
+      gap 6px;
+      align-items center;
+      background #162032;
+      padding 6px 8px;
+      border-radius 8px;
+      margin-bottom 6px;
+      border 1px solid transparent;
+    }
+
+    .set-row.completed {
+      background rgba(16, 185, 129, 0.1);
+      border-color rgba(16, 185, 129, 0.3);
+    }
+
+    .set-label {
+      font-size 11px;
+      font-weight 700;
+      color var(--text-muted);
+      text-transform uppercase;
+    }
+
+    .stepper-group {
+      display flex;
+      align-items center;
+      background #0b1322;
+      border-radius 6px;
+      border 1px solid #334155;
+      overflow hidden;
+    }
+
+    .btn-step {
+      background #243247;
+      color #fff;
+      border none;
+      width 24px;
+      height 32px;
+      font-weight 700;
+      font-size 14px;
+      cursor pointer;
+      display flex;
+      align-items center;
+      justify-content center;
+    }
+
+    .num-input {
+      width 100%;
+      height 32px;
+      border none;
+      background #ffffff;
+      color #0f172a;
+      text-align center;
+      font-size 14px;
+      font-weight 700;
+      padding 0 2px;
+      -moz-appearance textfield;
+    }
+
+    .num-input-webkit-outer-spin-button,
+    .num-input-webkit-inner-spin-button {
+      -webkit-appearance none;
+      margin 0;
+    }
+
+    .btn-check {
+      width 32px;
+      height 32px;
+      border-radius 50%;
+      border 2px solid #475569;
+      background transparent;
+      color transparent;
+      font-size 16px;
+      font-weight 900;
+      cursor pointer;
+      display flex;
+      align-items center;
+      justify-content center;
+      margin-left auto;
+    }
+
+    .btn-check.checked {
+      background var(--success);
+      border-color var(--success);
+      color #ffffff;
+    }
+
+     Action Buttons 
+    .btn-save {
+      width 100%;
+      background var(--success);
+      color #ffffff;
+      border none;
+      padding 14px;
+      border-radius 10px;
+      font-size 15px;
+      font-weight 800;
+      cursor pointer;
+      margin-top 10px;
+      text-transform uppercase;
+      letter-spacing 0.5px;
+      box-shadow 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-saveactive {
+      transform scale(0.98);
+    }
+
+     History & Log Feed 
+    .history-card {
+      border-bottom 1px solid var(--card-border);
+      padding 10px 0;
+    }
+
+    .history-cardlast-child {
+      border-bottom none;
+    }
+
+    .history-head {
+      display flex;
+      justify-content space-between;
+      font-size 13px;
+      font-weight 700;
+      margin-bottom 4px;
+      color var(--accent);
+    }
+
+    .history-details {
+      font-size 12px;
+      color var(--text-muted);
+      line-height 1.5;
+    }
+
+    .empty-state {
+      text-align center;
+      color var(--text-muted);
+      padding 24px 0;
+      font-size 13px;
+    }
+  style
+head
+body
+
+  !-- Sticky Pacing & Rest Header --
+  header class=header-panel
+    div class=timer-row
+      div
+        div style=font-size 10px; text-transform uppercase; color var(--text-muted); font-weight 700;Workout Sessiondiv
+        div id=workoutTimerDisplay class=clock-display3000div
+      div
+      div class=clock-controls
+        button id=btnToggleTimer class=btn-timer onclick=toggleTimer()Startbutton
+        button class=btn-timer onclick=resetTimer()Resetbutton
+      div
+    div
+    div class=rest-chip-row
+      span class=rest-labelRestspan
+      button class=btn-chip onclick=startRest(60)60sbutton
+      button class=btn-chip onclick=startRest(90)90sbutton
+      span id=restCountdown style=margin-left auto; font-size 13px; font-weight 800; color var(--accent);span
+    div
+  header
+
+  !-- Split Selector Navigation --
+  nav class=tab-bar
+    button class=tab-btn active id=tabBtnDayA onclick=switchTab('dayA')Day Abutton
+    button class=tab-btn id=tabBtnDayB onclick=switchTab('dayB')Day Bbutton
+    button class=tab-btn id=tabBtnHist onclick=switchTab('history')Historybutton
+  nav
+
+  !-- Tab 1 Day A (Squat & Push) --
+  main id=viewDayA
+    section class=card
+      div class=card-title onclick=toggleCollapsible('warmupContentA')
+        span3-Min Mobility Primespan
+        span class=tagPrepspan
+      div
+      div id=warmupContentA
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('w1')
+            span class=warmup-nameBox Hip Opener & Ankle Drivespan
+            span class=warmup-time45sspan
+          div
+          div id=w1 class=warmup-detailsPlace one foot on box. Drive knee directly over toes with heel pinned. Sink rear hip down to open hip flexor. 5 slow pulsesside.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('w2')
+            span class=warmup-nameWorld’s Greatest Stretch + T-Spinespan
+            span class=warmup-time45sspan
+          div
+          div id=w2 class=warmup-detailsDeep runner's lunge with hands planted inside lead foot. Drop inside elbow toward floor, then reach hand straight to ceiling while rotating chest. 4 repsside.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('w3')
+            span class=warmup-nameBehind-the-Neck Bar Press & Squat Sitspan
+            span class=warmup-time45sspan
+          div
+          div id=w3 class=warmup-detailsRest empty bar across rear traps. Press overhead 3 times. Pull back down, sink into a deep squat, and hold bottom position for 3s while gently shifting weight.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('w4')
+            span class=warmup-nameLow Box Step-Downs or Jumpsspan
+            span class=warmup-time30sspan
+          div
+          div id=w4 class=warmup-detailsPerform 6-8 crisp, low-impact box jumps (step down softly) to prime CNS and knee extension mechanics.div
+        div
+      div
+    section
+
+    section class=card id=dayAContainersection
+    button class=btn-save onclick=saveWorkout('Day A')Save Day A & Advancebutton
+  main
+
+  !-- Tab 2 Day B (Hinge & Pull) --
+  main id=viewDayB style=display none;
+    section class=card
+      div class=card-title onclick=toggleCollapsible('warmupContentB')
+        span3-Min Posterior Chain Primespan
+        span class=tagPrepspan
+      div
+      div id=warmupContentB
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('wb1')
+            span class=warmup-nameHinge to Wall & Hamstring Reachspan
+            span class=warmup-time45sspan
+          div
+          div id=wb1 class=warmup-detailsStand 6 inches from wall. Push glutes straight back until touching wall. Keep shins vertical, spine straight, and reach fingertips toward toes.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('wb2')
+            span class=warmup-nameBox Hip & T-Spine Openerspan
+            span class=warmup-time45sspan
+          div
+          div id=wb2 class=warmup-detailsHands on top of jump box, push hips back, and drop chest toward floor to stretch lats, shoulders, and thoracic spine.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('wb3')
+            span class=warmup-nameEmpty Barbell RDL Patterningspan
+            span class=warmup-time45sspan
+          div
+          div id=wb3 class=warmup-detailsPerform 8 slow, strict RDLs with the 45 lb bar. Focus on lats engaged, bar dragging down shins, and glute squeeze at lockout.div
+        div
+        div class=warmup-item
+          div class=warmup-header onclick=toggleAccordion('wb4')
+            span class=warmup-nameCrisp Box Step-Upsspan
+            span class=warmup-time30sspan
+          div
+          div id=wb4 class=warmup-details8 alternating step-ups without bouncing off rear leg. Stand tall on top of the box.div
+        div
+      div
+    section
+
+    section class=card id=dayBContainersection
+    button class=btn-save onclick=saveWorkout('Day B')Save Day B & Advancebutton
+  main
+
+  !-- Tab 3 History & Progress View --
+  main id=viewHistory style=display none;
+    section class=card
+      div class=card-title
+        spanCompleted Session Logsspan
+        button class=btn-timer style=background var(--danger); onclick=clearLogs()Clearbutton
+      div
+      div id=historyFeed style=margin-top 10px;div
+    section
+  main
+
+  script
+     Default Session Templates with AscendingIndependent Sets 
+    const defaultPrograms = {
+      dayA [
+        {
+          id sq,
+          name Barbell Back Squat,
+          sub Primary Compound  Rest 90s,
+          sets [
+            { label W1, weight 45, reps 8, rest 60, done false },
+            { label W2, weight 95, reps 5, rest 60, done false },
+            { label S1, weight 105, reps 8, rest 90, done false },
+            { label S2, weight 115, reps 7, rest 90, done false },
+            { label S3, weight 120, reps 6, rest 90, done false }
+          ]
+        },
+        {
+          id bp,
+          name DB Flat Bench Press,
+          sub Superset Pair 1  Rest 60s,
+          sets [
+            { label W1, weight 15, reps 8, rest 60, done false },
+            { label S1, weight 20, reps 10, rest 60, done false },
+            { label S2, weight 25, reps 8, rest 60, done false },
+            { label S3, weight 25, reps 8, rest 60, done false }
+          ]
+        },
+        {
+          id rdl,
+          name Kettlebell RDL,
+          sub Superset Pair 2  Rest 60s,
+          sets [
+            { label S1, weight 30, reps 12, rest 60, done false },
+            { label S2, weight 35, reps 10, rest 60, done false },
+            { label S3, weight 40, reps 8, rest 60, done false }
+          ]
+        },
+        {
+          id sc,
+          name Suitcase Carry,
+          sub Core Finisher  Each Side,
+          sets [
+            { label S1, weight 35, reps 40, rest 45, done false },
+            { label S2, weight 35, reps 40, rest 45, done false }
+          ]
+        }
+      ],
+      dayB [
+        {
+          id dl,
+          name Barbell Deadlift,
+          sub Hinge Primary  Rest 90s,
+          sets [
+            { label W1, weight 45, reps 5, rest 60, done false },
+            { label W2, weight 95, reps 5, rest 60, done false },
+            { label S1, weight 125, reps 5, rest 90, done false },
+            { label S2, weight 135, reps 5, rest 90, done false },
+            { label S3, weight 135, reps 5, rest 90, done false }
+          ]
+        },
+        {
+          id ohp,
+          name Barbell Overhead Press,
+          sub Vertical Push  Rest 60-90s,
+          sets [
+            { label W1, weight 45, reps 6, rest 60, done false },
+            { label S1, weight 55, reps 6, rest 60, done false },
+            { label S2, weight 65, reps 6, rest 90, done false },
+            { label S3, weight 65, reps 6, rest 90, done false }
+          ]
+        },
+        {
+          id row,
+          name Chest-Supported DB Row,
+          sub Incline Bench Lat Pull  Rest 60s,
+          sets [
+            { label S1, weight 20, reps 10, rest 60, done false },
+            { label S2, weight 25, reps 8, rest 60, done false },
+            { label S3, weight 25, reps 8, rest 60, done false }
+          ]
+        },
+        {
+          id step,
+          name Box Step-Ups,
+          sub Leg Flush  Bodyweight or light DB,
+          sets [
+            { label S1, weight 0, reps 8, rest 45, done false },
+            { label S2, weight 0, reps 8, rest 45, done false }
+          ]
+        }
+      ]
+    };
+
+     State Bootstrapping from localStorage 
+    let currentData = JSON.parse(localStorage.getItem(ironhabit_state_v1))  defaultPrograms;
+    let historyLogs = JSON.parse(localStorage.getItem(ironhabit_history_v1))  [];
+
+    function saveState() {
+      localStorage.setItem(ironhabit_state_v1, JSON.stringify(currentData));
+    }
+
+    function saveLogs() {
+      localStorage.setItem(ironhabit_history_v1, JSON.stringify(historyLogs));
+    }
+
+     Render Routines 
+    function renderWorkouts() {
+      renderRoutine(dayA, dayAContainer);
+      renderRoutine(dayB, dayBContainer);
+    }
+
+    function renderRoutine(dayKey, targetElId) {
+      const container = document.getElementById(targetElId);
+      container.innerHTML = ;
+
+      currentData[dayKey].forEach((exercise, exIdx) = {
+        const block = document.createElement(div);
+        block.className = exercise-block;
+
+        let setsHTML = ;
+        exercise.sets.forEach((set, setIdx) = {
+          setsHTML += `
+            div class=set-row ${set.done  'completed'  ''} id=row-${dayKey}-${exIdx}-${setIdx}
+              span class=set-label${set.label}span
+              
+              !-- Independent Weight Stepper --
+              div class=stepper-group onclick=event.stopPropagation()
+                button class=btn-step onclick=stepVal('${dayKey}', ${exIdx}, ${setIdx}, 'weight', -5)-button
+                input class=num-input type=number inputmode=numeric pattern=[0-9] 
+                  value=${set.weight} 
+                  onchange=updateVal('${dayKey}', ${exIdx}, ${setIdx}, 'weight', this.value)
+                button class=btn-step onclick=stepVal('${dayKey}', ${exIdx}, ${setIdx}, 'weight', 5)+button
+              div
+
+              !-- Independent Reps Stepper --
+              div class=stepper-group onclick=event.stopPropagation()
+                button class=btn-step onclick=stepVal('${dayKey}', ${exIdx}, ${setIdx}, 'reps', -1)-button
+                input class=num-input type=number inputmode=numeric pattern=[0-9] 
+                  value=${set.reps} 
+                  onchange=updateVal('${dayKey}', ${exIdx}, ${setIdx}, 'reps', this.value)
+                button class=btn-step onclick=stepVal('${dayKey}', ${exIdx}, ${setIdx}, 'reps', 1)+button
+              div
+
+              !-- Isolated Check Button --
+              button class=btn-check ${set.done  'checked'  ''} 
+                onclick=toggleDone('${dayKey}', ${exIdx}, ${setIdx}, ${set.rest})
+                ✓
+              button
+            div
+          `;
+        });
+
+        block.innerHTML = `
+          div class=exercise-header
+            span class=exercise-name${exercise.name}span
+            span class=exercise-sub${exercise.sub}span
+          div
+          ${setsHTML}
+        `;
+        container.appendChild(block);
+      });
+    }
+
+     Steppers & Value Handling 
+    function stepVal(dayKey, exIdx, setIdx, field, delta) {
+      let val = parseInt(currentData[dayKey][exIdx].sets[setIdx][field], 10)  0;
+      val = Math.max(0, val + delta);
+      currentData[dayKey][exIdx].sets[setIdx][field] = val;
+      saveState();
+      renderWorkouts();
+    }
+
+    function updateVal(dayKey, exIdx, setIdx, field, value) {
+      let val = parseInt(value, 10);
+      if (isNaN(val)  val  0) val = 0;
+      currentData[dayKey][exIdx].sets[setIdx][field] = val;
+      saveState();
+    }
+
+    function toggleDone(dayKey, exIdx, setIdx, restInterval) {
+      const set = currentData[dayKey][exIdx].sets[setIdx];
+      set.done = !set.done;
+      saveState();
+      renderWorkouts();
+
+      if (set.done) {
+        startRest(restInterval  60);
+      }
+    }
+
+     Auto-Progression on Session Completion 
+    function saveWorkout(dayTitle) {
+      const dayKey = dayTitle === Day A  dayA  dayB;
+      const routine = currentData[dayKey];
+
+      let logDetails = [];
+      routine.forEach(ex = {
+        let completedSets = ex.sets.filter(s = s.done);
+        if (completedSets.length  0) {
+          let summary = completedSets.map(s = `${s.weight}#×${s.reps}`).join(, );
+          logDetails.push(`${ex.name} ${summary}`);
+        }
+
+         Progression rule If all working sets completed, bump Barbell compounds +5 lbs next time
+        let allWorkDone = ex.sets.filter(s = s.label.startsWith(S)).every(s = s.done);
+        if (allWorkDone) {
+          if (ex.name.includes(Barbell)) {
+            ex.sets.forEach(s = {
+              if (s.weight  45) s.weight += 5;  Keep empty bar 45
+            });
+          }
+        }
+         Reset checks for the next workout
+        ex.sets.forEach(s = s.done = false);
+      });
+
+      const entry = {
+        date new Date().toLocaleDateString(en-US, { weekday short, month short, day numeric }),
+        title dayTitle,
+        details logDetails.length  logDetails.join(  )  Session logged (no completed sets checked).
+      };
+
+      historyLogs.unshift(entry);
+      saveLogs();
+      saveState();
+      renderWorkouts();
+      renderHistory();
+      switchTab('history');
+      alert(`${dayTitle} saved! Weights auto-advanced for next session.`);
+    }
+
+    function renderHistory() {
+      const feed = document.getElementById(historyFeed);
+      if (historyLogs.length === 0) {
+        feed.innerHTML = `div class=empty-stateNo workouts recorded yet. Finish a session and tap save!div`;
+        return;
+      }
+      feed.innerHTML = historyLogs.map(log = `
+        div class=history-card
+          div class=history-head
+            span${log.title}span
+            span${log.date}span
+          div
+          div class=history-details${log.details}div
+        div
+      `).join();
+    }
+
+    function clearLogs() {
+      if (confirm(Reset workout history)) {
+        historyLogs = [];
+        saveLogs();
+        renderHistory();
+      }
+    }
+
+     Tab Switcher 
+    function switchTab(tab) {
+      document.getElementById(viewDayA).style.display = tab === 'dayA'  'block'  'none';
+      document.getElementById(viewDayB).style.display = tab === 'dayB'  'block'  'none';
+      document.getElementById(viewHistory).style.display = tab === 'history'  'block'  'none';
+
+      document.getElementById(tabBtnDayA).classList.toggle(active, tab === 'dayA');
+      document.getElementById(tabBtnDayB).classList.toggle(active, tab === 'dayB');
+      document.getElementById(tabBtnHist).classList.toggle(active, tab === 'history');
+    }
+
+     Accordions & Visual Cues 
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle(open);
+    }
+
+    function toggleCollapsible(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === none  block  none;
+    }
+
+     Audio Chime (Web Audio API - No external assets) 
+    function playBeep() {
+      try {
+        const audioCtx = new (window.AudioContext  window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = sine;
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);  High A
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } catch (e) {
+        console.log(Audio not supported  user gesture needed.);
+      }
+    }
+
+     Workout & Rest Timers 
+    let timerDuration = 30  60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    function toggleTimer() {
+      const btn = document.getElementById(btnToggleTimer);
+      if (!isRunning) {
+        isRunning = true;
+        btn.textContent = Pause;
+        btn.style.background = #eab308;
+        timerInterval = setInterval(() = {
+          if (timerDuration  0) {
+            timerDuration--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            isRunning = false;
+            playBeep();
+            btn.textContent = Start;
+            alert(30 Minutes Up! Wrap it up.);
+          }
+        }, 1000);
+      } else {
+        clearInterval(timerInterval);
+        isRunning = false;
+        btn.textContent = Resume;
+        btn.style.background = #334155;
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+      timerDuration = 30  60;
+      updateTimerDisplay();
+      const btn = document.getElementById(btnToggleTimer);
+      btn.textContent = Start;
+      btn.style.background = #334155;
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(timerDuration  60).toString().padStart(2, 0);
+      const s = (timerDuration % 60).toString().padStart(2, 0);
+      document.getElementById(workoutTimerDisplay).textContent = `${m}${s}`;
+    }
+
+    let restInterval = null;
+    function startRest(seconds) {
+      clearInterval(restInterval);
+      let remaining = seconds;
+      const display = document.getElementById(restCountdown);
+      display.textContent = `Rest ${remaining}s`;
+
+      restInterval = setInterval(() = {
+        remaining--;
+        if (remaining  0) {
+          display.textContent = `Rest ${remaining}s`;
+        } else {
+          clearInterval(restInterval);
+          display.textContent = Go!;
+          playBeep();
+          setTimeout(() = { display.textContent = ; }, 3000);
+        }
+      }, 1000);
+    }
+
+     Initialize on load
+    renderWorkouts();
+    renderHistory();
+  script
+body
+html

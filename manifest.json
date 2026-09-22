@@ -1,0 +1,18 @@
+{
+  "name": "Rack Log Pro",
+  "short_name": "RackLog",
+  "description": "30-Minute Minimalist Garage Gym Lifting App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1312",
+  "theme_color": "#0E1312",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230E1312'/%3E%3Cpath d='M80 256h352M128 176v160M176 196v120M384 176v160M336 196v120' stroke='%2338BDF8' stroke-width='28' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
